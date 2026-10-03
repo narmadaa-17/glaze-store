@@ -1,21 +1,31 @@
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useCart } from '../context/CartContext.jsx'
+
 export default function Layout() {
   const { count } = useCart()
   const { pathname } = useLocation()
+
   useEffect(() => window.scrollTo(0, 0), [pathname])
+
   return (
     <>
       <header className="bar">
-        <Link to="/" className="logo">Glaze</Link>
+        <a href="/" className="logo">Glaze</a>
+
         <nav>
-          <NavLink to="/" end>Shop</NavLink>
-          <NavLink to="/cart">Cart ({count})</NavLink>
+          <a href="/">Shop</a>
+          <a href="/cart">Cart ({count})</a>
         </nav>
       </header>
-      <main><Outlet /></main>
-      <footer className="pad">Glaze. Made in small batches.</footer>
+
+      <main>
+        <Outlet />
+      </main>
+
+      <footer className="pad">
+        Glaze. Made in small batches.
+      </footer>
     </>
   )
 }
